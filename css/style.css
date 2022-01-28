@@ -42,6 +42,11 @@ h3 {
     color: #333333;
 }
 
+.section-title {
+    margin: 80px auto 0;
+    text-align: center;
+}
+
 /* Header */
 
 .header {
@@ -49,6 +54,68 @@ h3 {
     justify-content: space-between;
     align-items: flex-end;
     margin-top: 17px;
+    position: relative;
+}
+
+#toggle {
+    display: none;
+    cursor: pointer;
+}
+
+#toggle:checked ~ .menu {
+    top: 50px;
+}
+
+#toggle:checked ~ label .toggle-btn {
+    transform: rotate(45deg);
+}
+
+#toggle:checked ~ label .toggle-btn::before {
+    top: 0;
+}
+
+#toggle:checked ~ label .toggle-btn::after {
+    top: 0;
+    transform: rotate(-90deg);
+}
+
+label {
+    display: none;
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+.toggle-btn {
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: #95E1D3;
+    position: absolute;
+    top: 50%;
+    transition: all .3s;
+}
+
+.toggle-btn::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: #95E1D3;
+    position: absolute;
+    top: -10px;
+    transition: all .3s;
+}
+
+.toggle-btn::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: #95E1D3;
+    position: absolute;
+    top: 10px;
+    transition: all .3s;
 }
 
 .logo {
@@ -57,11 +124,11 @@ h3 {
     font-size: 30px;
     line-height: 37px;
     color: #95E1D3;
+    z-index: 2;
 }
 
 .menu-list {
     display: flex;
-
 }
 
 .menu-item {
@@ -74,12 +141,9 @@ h3 {
 }
 
 .menu-link {
-    color: #95E1D3;
-}
-
-.menu-link {
     padding-bottom: 10px;
     transition: .1s;
+    color: #95E1D3;
 }
 
 .menu-link:hover {
@@ -87,12 +151,40 @@ h3 {
     border-bottom: 3px #F38181 solid;
 }
 
-/* Services */
+@media (max-width: 768px) {
+    label {
+        display: block;
+        z-index: 1;
+    }
 
-.section-title {
-    margin-top: 81px;
-    text-align: center;
+    .menu {
+        position: absolute;
+        width: 100%;
+        top: -400%;
+        left: 0;
+        background: white;
+        transition: top .8s;
+    }
+
+    .menu-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-item {
+        margin: 0 0 5px;
+    }
+
+    .menu-link:hover {
+        border: none;
+    }
+
+    .menu-link {
+        padding-bottom: 0;
+    }
 }
+
+/* Services */
 
 .uptitle {
     margin-bottom: 20px;
@@ -124,7 +216,7 @@ h3 {
     width: 33.333%;
     display: flex;
     align-items: flex-start;
-    padding: 0 35px 100px 0;
+    padding: 0 0 100px 35px;
 }
 
 .services-item img {
@@ -139,10 +231,36 @@ h3 {
     line-height: 1.22em;
 }
 
-.team p {
+.under {
     margin-top: 45px;
     margin-bottom: 27px;
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    .services-item {
+        width: 50%;
+        padding: 0 0 70px 25px;
+    }
+
+    .services-text h3 {
+        padding-bottom: 15px;
+    }
+}
+
+@media (max-width: 426px) {
+    .services-item {
+        width: 100%;
+        padding: 0 0 50px 15px;
+    }
+
+    .services-text h3 {
+        padding-bottom: 10px;
+    }
+
+    .under {
+        font-size: 0.8em;
+    }
 }
 
 /* Man */
@@ -156,42 +274,57 @@ h3 {
     text-align: center;
 }
 
+.card-img {
+    display: block;
+    width: 100%;
+}
+
 .card-item h3 {
     padding: 30px 0 11px;
+}
+
+@media (max-width: 426px) {
+    .card-item h3 {
+        font-size: 0.8em;
+        padding: 15px 0 6px;
+    }
+
+    .card-item p {
+        font-size: 0.7em;
+    }
 }
 
 /* Footer */
 
 .footer {
     margin-top: 80px;
-    height: 59px;
-    border-top: 1px #B6B6B6 solid;
+    border-top: 1px solid  #B6B6B6 ;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .copyright {
-    /* padding: 22px 0 20px; */
     font-family: 'Montserrat', serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    /* text-align: center; */
     color: #333333;
+    text-align: center;
 }
 
 .copyright a {
     color: #F38181;
 }
 
-.buttons {
+.button {
     display: flex;
+    margin: 10px 0;
 }
 
 .email {
     width: 230px;
-    height: 39px;
+    height: 40px;
     padding-left: 10px;
     font-family: 'Roboto', serif;
     font-style: italic;
@@ -220,5 +353,23 @@ h3 {
     cursor: pointer;
 }
 
+@media (max-width: 580px) {
+    .footer {
+        flex-direction: column-reverse;
+        margin-top: 40px;
+    }
+
+    .button {
+        flex-direction: column;
+    }
+    
+    .subscribe {
+        width: 230px;
+    }
+    
+    .copyright {
+        margin: 5px 0;
+    }
+}
 
 
